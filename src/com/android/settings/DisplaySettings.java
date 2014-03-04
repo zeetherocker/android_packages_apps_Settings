@@ -256,7 +256,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mCrtMode.setSummary(mCrtMode.getEntry());
             mCrtMode.setOnPreferenceChangeListener(this);
         } else if (animationOptions != null) {
-            prefSet.removePreference(animationOptions);
+//            prefSet.removePreference(animationOptions);
         }
     }
 
