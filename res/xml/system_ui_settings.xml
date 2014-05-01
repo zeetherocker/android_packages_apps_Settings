@@ -51,6 +51,11 @@
         android:title="@string/interface_category" >
 
         <PreferenceScreen
+            android:id="@+id/app_circle_sidebar"
+            android:title="@string/app_circle_bar_title"
+            android:fragment="com.android.settings.mahdi.omni.AppCircleSidebar" />
+
+        <PreferenceScreen
             android:key="active_display"
             android:fragment="com.android.settings.crdroid.ActiveDisplaySettings"
             android:title="@string/ad_settings_title"/>
