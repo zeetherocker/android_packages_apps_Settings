@@ -35,6 +35,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.crdroid.SeekBarPreferenceChOS;
 import com.android.settings.SettingsPreferenceFragment;
 
 import com.android.settings.mahdi.lsn.AppMultiSelectListPreference;
@@ -47,8 +48,14 @@ import java.util.Set;
 public class AppCircleSidebar extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AppCircleSidebar";
+    private static final String KEY_TRIGGER_WIDTH = "trigger_width";
+    private static final String KEY_TRIGGER_TOP = "trigger_top";
+    private static final String KEY_TRIGGER_BOTTOM = "trigger_bottom";
 
     private static final String PREF_INCLUDE_APP_CIRCLE_BAR_KEY = "app_circle_bar_included_apps";
+    private SeekBarPreferenceChOS mTriggerWidthPref;
+    private SeekBarPreferenceChOS mTriggerTopPref;
+    private SeekBarPreferenceChOS mTriggerBottomPref;
 
     private AppMultiSelectListPreference mIncludedAppCircleBar;
 
@@ -64,6 +71,21 @@ public class AppCircleSidebar extends SettingsPreferenceFragment implements
         Set<String> includedApps = getIncludedApps();
         if (includedApps != null) mIncludedAppCircleBar.setValues(includedApps);
         mIncludedAppCircleBar.setOnPreferenceChangeListener(this);
+
+        mTriggerWidthPref = (SeekBarPreferenceChOS) findPreference(KEY_TRIGGER_WIDTH);
+        mTriggerWidthPref.setValue(Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_CIRCLE_BAR_TRIGGER_WIDTH, 10));
+        mTriggerWidthPref.setOnPreferenceChangeListener(this);
+
+        mTriggerTopPref = (SeekBarPreferenceChOS) findPreference(KEY_TRIGGER_TOP);
+        mTriggerTopPref.setValue(Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_CIRCLE_BAR_TRIGGER_TOP, 0));
+        mTriggerTopPref.setOnPreferenceChangeListener(this);
+
+        mTriggerBottomPref = (SeekBarPreferenceChOS) findPreference(KEY_TRIGGER_BOTTOM);
+        mTriggerBottomPref.setValue(Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_CIRCLE_BAR_TRIGGER_HEIGHT, 100));
+        mTriggerBottomPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -71,6 +93,21 @@ public class AppCircleSidebar extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mIncludedAppCircleBar) {
             storeIncludedApps((Set<String>) objValue);
+        } else if (preference == mTriggerWidthPref) {
+            int width = ((Integer)objValue).intValue();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.APP_CIRCLE_BAR_TRIGGER_WIDTH, width);
+            return true;
+        } else if (preference == mTriggerTopPref) {
+            int top = ((Integer)objValue).intValue();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.APP_CIRCLE_BAR_TRIGGER_TOP, top);
+            return true;
+        } else if (preference == mTriggerBottomPref) {
+            int bottom = ((Integer)objValue).intValue();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.APP_CIRCLE_BAR_TRIGGER_HEIGHT, bottom);
+            return true;
         } else {
             return false;
         }
@@ -97,5 +134,19 @@ public class AppCircleSidebar extends SettingsPreferenceFragment implements
         }
         Settings.System.putString(getActivity().getContentResolver(),
                 Settings.System.WHITELIST_APP_CIRCLE_BAR, builder.toString());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Settings.System.putInt(getContentResolver(),
+                Settings.System.APP_CIRCLE_BAR_SHOW_TRIGGER, 0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Settings.System.putInt(getContentResolver(),
+                Settings.System.APP_CIRCLE_BAR_SHOW_TRIGGER, 1);
     }
 }
