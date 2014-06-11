@@ -1329,4 +1329,9 @@
     <!-- Text for Misc Tweaks entry -->
     <string name="extras_title">Extras</string>
 
+    <!--Blacklist-->
+    <string name="blacklist_button_title">Blacklist</string>
+    <string name="floating_blacklist_label">Blacklist from Floating Mode</string>
+    <string name="hover_blacklist_label">Blacklist from Hover</string>
+
 </resources>
