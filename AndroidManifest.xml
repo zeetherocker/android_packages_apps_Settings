@@ -2201,6 +2201,37 @@
             android:exported="false"
             android:name=".cyanogenmod.LtoService">
         </service>
+        
+        <!-- started from ... somewhere -->
+        <activity
+            android:name=".BeanBag"
+            android:label="BeanBag"
+            android:icon="@drawable/redbean2"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true" />
+            
+       <!-- Based on CyanogenMod's CIDCircus, Android's easteregg -->
+        <activity android:name=".pac.PACLogoActivity"
+                android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
+                android:process=":ui">
+        </activity>
+        <activity
+            android:name=".pac.PACCircus"
+            android:exported="true"
+            android:label="PACCircus"
+            android:icon="@drawable/empty_icon"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name=".pac.PACLOGO" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".search.SearchPopulator"/>
     </application>
