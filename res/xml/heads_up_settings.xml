@@ -33,6 +33,10 @@
             android:icon="@drawable/ic_menu_add"
             android:title="@string/add_heads_up_package"
             android:summary="@string/add_heads_up_blacklist_summary"/>
+        <Preference
+            android:key="heads_up_floating_window"
+            android:title="@string/heads_up_floating_window"
+            android:defaultValue="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>
