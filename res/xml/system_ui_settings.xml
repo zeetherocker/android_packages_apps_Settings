@@ -169,6 +169,12 @@
             android:title="@string/wakelock_blocker"
             android:summary="@string/wakelock_blocker_header_summary" />
 
+         <Preference
+            android:key="fc_tweaks"
+            android:fragment="com.android.settings.pac.FCTweaks"
+            android:layout="@layout/preference_fctweaks"
+            android:title="@string/extras_title"/>
+
     </PreferenceCategory>
 
     <!-- Device Specific Touchscreen gestures. Avoid duplicating CMHW functionality, please -->

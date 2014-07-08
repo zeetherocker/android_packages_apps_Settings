@@ -1840,6 +1840,8 @@
 
         <activity android:name=".pac.AppSidebar" />
 
+        <activity android:name=".pac.FCTweaks" />
+
         <activity android:name=".pac.NotificationDrawerStyle" />
 
         <activity android:name=".pac.NavRingTargets" />
